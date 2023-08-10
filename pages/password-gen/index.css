@@ -1,0 +1,75 @@
+
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', Arial, sans-serif;
+    color: white;
+    text-align: center;
+    background-color: #1F2937;
+}
+
+h1 {
+    color: #4ADF86;
+    margin-top: 2em;    
+}
+h2 {
+    font-size: larger;
+}
+p {
+    color: #949494;
+}
+#container {
+    margin-top: 50px;
+    background-color: #1F2937;
+    height: 50vh;
+
+}
+span {
+    color: #4ADF86;
+}
+button {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', Arial, sans-serif;
+    font-size: medium;
+    background-color: #4ADF86;
+    border-radius: 5px;
+    height: 2em;
+    border-style: none;
+    transition: all 0.1s ease ;
+}
+button:hover {
+    background-color: rgb(74, 255, 146);
+    cursor: pointer;
+    scale: 1.05;
+}
+button:active {
+    background-color:#4ADF86;
+    border: #35995d solid 2px;
+    cursor: pointer;
+    scale: 1.02;
+}
+line {
+    margin: auto;
+    display: block;
+    max-width: 400px;
+    width: 80%;
+    height: 1px;
+    margin-top: 20px;
+    background-color: #2A374A;
+}
+
+#password-el {
+    color: #4AC97F;
+    background-color: #273549;
+    max-width: 400px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+}
+
+#copy {
+    max-width: 400px;
+    margin-top: 10px;
+    width: 100%;
+}
