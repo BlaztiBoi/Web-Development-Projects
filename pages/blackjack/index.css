@@ -35,7 +35,6 @@ button:hover {
     background: rgb(255, 187, 14);
 
 }
-
 button:active {
     background: goldenrod;
     border: rgb(152, 115, 24) 2px solid;
