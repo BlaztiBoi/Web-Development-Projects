@@ -42,3 +42,22 @@ button:active {
 
 
 }
+
+/* #SelectedCards {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: left; 
+    align-items: left;
+}*/
+#cards-el span {
+	color: black;
+	background-color: #ecebeb;
+	border: 2px solid #af935f;
+	border-radius: 15%;
+	text-align: center;
+	font-size:0.9em;
+	user-select: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+	margin-right: 5px;
+}

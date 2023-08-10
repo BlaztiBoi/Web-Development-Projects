@@ -2,16 +2,18 @@
     <head>
         <link rel="stylesheet" href="../../main.css">
         <link rel="stylesheet" href="index.css">
-      
+        <span>♠ ♥ ♣ ♦ </span>
     </head>
     <body>
         <a href="../../index.html" class="home-button">Home</a>
         <h1>Blackjack</h1>
         <p id="message-el">Want to play a round?</p>
-        <p id="cards-el">Cards:</p>
+        <div id="cards-el">Cards:
+               
+        </div>
         <p id="sum-el">Sum:</p>
-        <button onclick="startGame()">START GAME</button>
-        <button onclick="newCard()">NEW CARD</button>
+        <button onclick="startGame()" id="start-game">START GAME</button>
+        <button onclick="newCard()" id="new-card" style="display:none;">NEW CARD</button>
         <p id="player-el"></p>
         <script src="index.js"></script>
     </body>

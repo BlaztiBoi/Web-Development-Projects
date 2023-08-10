@@ -1,62 +1,110 @@
-let player = { name: "Player", chips: 190 }
-let cards = []
-let sum = 0
-let hasBlackJack = false
-let isAlive = false
+let cardsList = {    
+    1 : ["A",11],
+    2 : ["2",2],
+    3 : ["3",3],
+    4 : ["4",4],
+    5 : ["5",5],
+    6 : ["6",6],
+    7 : ["7",7],
+    8 : ["8",8],
+    9 : ["9",9],
+    10 : ["10",10],
+    11 : ["J",10],
+    12 : ["Q",10],
+    13 : ["K",10]
+}
+let suit_ids = ["♣", "♦", "♥", "♠"]
+
+let player = { name: "Player", chips: 190  , cards: [] , sum : 0 , isAlive : false , hasBlackJack : false }
+
 let message = ""
 let messageEl = document.getElementById("message-el")
 let sumEl = document.getElementById("sum-el")
 let cardsEl = document.getElementById("cards-el")
-// 3. Grab ahold of the player-el paragraph and store it in a variable called playerEl
 let playerEl = document.getElementById("player-el")
-// 4. Render the player's name and chips in playerEl
-playerEl.textContent = player.name + ": " + player.chips + " chips"
+let UISettings = {
+    hideStartGame(){
+        let startGame = document.getElementById("start-game")
+        startGame.style.display = "none"
+    },
+    hideNewCard(){
+        let newCard = document.getElementById("new-card")
+        newCard.style.display = "none"
+    },
+    showStartGame(){
+        let startGame = document.getElementById("start-game")
+        startGame.style.display = ""
+    },
+    showNewCard(){
+        let newCard = document.getElementById("new-card")
+        newCard.style.display = ""
+    }
+}
+// playerEl.textContent = player.name + ": " + player.chips + " chips"
 
 function getRandomCard() {
-    let randomNumber = Math.floor(Math.random() * 13) + 1
-    if (randomNumber > 10) {
-        return 10
-    } else if (randomNumber === 1) {
-        return 11
-    } else {
-        return randomNumber
-    }
-}
+    let randomCard = cardsList[Math.floor(Math.random()* Object.keys(cardsList).length) +1]
+    let randomSuit = suit_ids[Math.floor(Math.random()* suit_ids.length)]
+    let card = {
+        name : randomCard[0],
+        value : randomCard[1],
+        suit : randomSuit
 
+    }
+
+    return card
+    
+}
+function createNewCard(card){
+
+    let span = document.createElement("span")
+    span.textContent = card.suit +" "+ card.name
+    cardsEl.appendChild(span)
+}
 function startGame() {
-    isAlive = true
+    player.hasBlackJack = false
+    player.isAlive = true
+    cardsEl.innerHTML = "Cards : "
     let firstCard = getRandomCard()
     let secondCard = getRandomCard()
-    cards = [firstCard, secondCard]
-    sum = firstCard + secondCard
+    player.cards = [firstCard, secondCard]
+    player.sum = firstCard.value + secondCard.value
+    UISettings.hideStartGame()
+    UISettings.showNewCard()
     renderGame()
 }
-
 function renderGame() {
-    cardsEl.textContent = "Cards: "
-    for (let i = 0; i < cards.length; i++) {
-        cardsEl.textContent += cards[i] + " "
+    cardsEl.innerHTML = "Cards : "
+    for (let i = 0; i < player.cards.length; i++) {
+
+       createNewCard(player.cards[i])
     }
 
-    sumEl.textContent = "Sum: " + sum
-    if (sum <= 20) {
+    sumEl.textContent = "Sum: " + player.sum
+    if (player.sum <= 20) {
         message = "Do you want to draw a new card?"
-    } else if (sum === 21) {
+        UISettings.showNewCard()
+    } else if (player.sum === 21) {
         message = "You've got Blackjack!"
-        hasBlackJack = true
+        player.hasBlackJack = true
+        UISettings.showStartGame()
+        UISettings.hideNewCard()
     } else {
         message = "You're out of the game!"
-        isAlive = false
+        player.isAlive = false
+        UISettings.showStartGame()
+        UISettings.hideNewCard()
     }
     messageEl.textContent = message
+
 }
 
-
 function newCard() {
-    if (isAlive === true && hasBlackJack === false) {
+    if (player.isAlive === true && player.hasBlackJack === false) {
         let card = getRandomCard()
-        sum += card
-        cards.push(card)
+        player.sum += card.value
+        player.cards.push(card)
+       
         renderGame()
     }
 }
