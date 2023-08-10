@@ -87,7 +87,7 @@ function renderGame() {
     } else if (player.sum === 21) {
         message = "You've got Blackjack!"
         player.hasBlackJack = true
-        UISettings.showStartGame()
+        UISettings.showStartGame() 
         UISettings.hideNewCard()
     } else {
         message = "You're out of the game!"
