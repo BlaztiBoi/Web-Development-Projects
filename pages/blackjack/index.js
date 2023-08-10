@@ -79,7 +79,7 @@ function renderGame() {
 
        createNewCard(player.cards[i])
     }
-
+ 
     sumEl.textContent = "Sum: " + player.sum
     if (player.sum <= 20) {
         message = "Do you want to draw a new card?"
