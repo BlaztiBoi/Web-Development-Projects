@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="I don't know">
@@ -10,6 +9,7 @@
     <title>Blazt's Projects ( Webs )</title>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="main.css">
+   
 </head>
 <body>
     <a href="index.html" class="home-button">Home</a>
@@ -22,7 +22,42 @@
             <hr>
             <h1>Browsers Extensions</h1>
             <li><a href="browser-extensions/tabs-saver/index.html">Tabs Saver</a></li>
+            <hr>
+            <ul> <li><a href="javascript:void(0);" onclick="toggleAboutMe()">About me </a></li></ul>
         </ul>
     </div>
+    
+    <div class="about-me-card" id="about-me">
+        <h1>About Me</h1>
+        <p>
+            My name is Aung Htet Oo, but I go by Blazt in online circles. I'm 17 years old, born in February 2006, and I'm from Myanmar. My passion lies in programming and coding, and I've been pursuing it since I was young. I believe I have a lot of potential and I'm constantly learning.
+        </p>
+        <p>
+            Currently, I'm mastering Python, React.js, Java, C#, C++, and more. I'm proficient in front-end development and have plans to delve into back-end development, software engineering, networking security, game development, and various other areas.
+        </p>
+        <p>
+            I have a deep love for anime, coding, and music. These are not just my hobbies; they are a significant part of my life that fuels my creativity and passion for technology.
+        </p>
+        <div class="contact-footer"> 
+            <div class="contact-icons">
+                <a href="https://discord.gg/WkGX4DH4ws" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/discord-512.png" alt="Discord"></a>
+                <a href="https://github.com/BlaztiBoi/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"></a>
+                <a href="https://www.facebook.com/AungHtetOo.2006/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook"></a>
+            </div>
+        <p class="phone-number">Email : aunghtetoodawei11@gmail.com</p>
+        <p class="phone-number">Feel free to reach out !</p>
+        </div>
+    </div>
+
+    <script>
+       function toggleAboutMe() {
+           var aboutMeCard = document.getElementById("about-me");
+           if (aboutMeCard.style.display === "none" || aboutMeCard.style.display === "") {
+               aboutMeCard.style.display = "block";
+           } else {
+               aboutMeCard.style.display = "none";
+           }
+       }
+   </script>
 </body>
-</html> 
+</html>

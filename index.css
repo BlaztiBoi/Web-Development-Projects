@@ -37,3 +37,57 @@ body {
 .project-list ul li a:hover {
     color: #0056b3;
 }
+
+.about-me-card {
+    color:#333; 
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0e3b4;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: none; 
+}
+
+.contact-footer {
+    border: #f0e3b4 1px solid;
+    border-radius: 10px;
+    background-color: #dbcfa7;
+    color: #000000;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.contact-icons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.contact-icons a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;
+    margin: 0 15px;
+    transition: all 0.2s ease;
+}
+.contact-icons img {
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background-color: #fff;
+    width: 35px; 
+    height: 35px; 
+}
+.contact-icons a:hover {
+    transform: scale(1.1);
+}
+
+.phone-number {
+    color:#333;
+    font-size: 14px;
+}
