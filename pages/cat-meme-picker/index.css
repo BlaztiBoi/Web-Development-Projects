@@ -115,6 +115,16 @@ input[type="radio"]{
     border: none;
     border-radius: 5px;
     margin-bottom: 8px;
+    
+    transition: all 0.2s ease;
+}
+.get-image-btn:hover {
+    cursor: pointer;
+    background: rgba(160, 128, 140, 0.978); 
+}
+.get-image-btn:disabled{
+    cursor:default;
+    background-color: #b79da6;
 }
 
 /* modal */
@@ -130,11 +140,15 @@ input[type="radio"]{
     justify-content: center;
     border: 1px solid #67595e;
     border-radius: 5px;
-    width: 420px;
+    width: 100%;
     height: 490px;
     background-color: #fff0ee;
 }
-
+@media only screen and (min-width: 600px) {
+    .meme-modal {
+        width: 420px;
+    }
+  }
 .cat-img{
     max-width: 340px;
     max-height: 420px;
