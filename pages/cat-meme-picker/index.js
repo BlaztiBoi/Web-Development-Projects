@@ -15,9 +15,20 @@ memeModelCloseBtn.addEventListener("click", hideModal)
 getImageBtn.addEventListener("click", renderCat)
 
 
+    document.addEventListener("click", function (e) {
+        if (memeModalDiv.style.display === 'flex'){
+            if (e.target !== memeModalDiv && e.target !== getImageBtn) {
+                hideModal();
+            }
+        }
+
+    });
+    
+
 function hideModal() {
     memeModalDiv.style.display = "none"
     getImageBtn.disabled = false
+
 }
 
 function highlightCheckedOption(e) {
@@ -28,6 +39,7 @@ function highlightCheckedOption(e) {
     }
     let radioInput = document.getElementById(e.target.id)
     radioInput.parentElement.classList.add("highlight")
+    getImageBtn.disabled = false
 }
 
 function renderCat() {
