@@ -59,7 +59,7 @@ function getSingleCatObject() {
     const catsArray = getMatchingCatsArray()
 
     if (catsArray.length === 1) {
-        console.log(catsArray[0])
+        return catsArray[0]
     } else {
         return catsArray[Math.floor(Math.random() * catsArray.length)]
     }

@@ -29,6 +29,9 @@
         <link rel="stylesheet" href="../../main.css"> 
         <link rel="stylesheet" href="index.css"> 
 
+         <!-- Font Awesome -->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     </head>
     <body> 
         <a href="../../index.html" class="home-button">Home</a>
@@ -36,13 +39,18 @@
         <header>
             <h1>Twimba</h1>
         </header>
-        <main>
+        <main>  
             <div class="tweet-input-area">
                 <img src="images/twitterClone_ico.png" class="profile-pic">
+
+            <textarea
+            id="tweet-input"
+            placeholder="What's happening?"></textarea>
             </div>
+          
             <button id="tweet-btn">Tweet</button>
             <div class="feed" id="feed"></div>
         </main>
-        <script src="index.js"></script> 
+        <script src="index.js" type="module"></script> 
     </body>
 </html>
