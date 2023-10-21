@@ -45,11 +45,14 @@
             <h1>Browsers Extensions</h1>
             <li><a href="browser-extensions/tabs-saver/index.html">Tabs Saver</a></li>
             <hr>
-            <ul> <li><a href="javascript:void(0);" onclick="toggleAboutMe()">About me </a></li></ul>
+            <ul> 
+                <li><a href="javascript:void(0);" onclick="toggleAboutMe()">About me </a></li>
+                <li><a href="javascript:void(0);" onclick="toggleCommits()">GitHub Commit Histories </a></li>
+            </ul>
         </ul>
     </div>
     
-    <div class="about-me-card" id="about-me">
+    <div class="about-me-card hide" id="about-me">
         <h1>About Me</h1>
         <p>
             My name is Aung Htet Oo, but I go by Blazt in online circles. I'm 17 years old, born in February 2006, and I'm from Myanmar. My passion lies in programming and coding, and I've been pursuing it since I was young. I believe I have a lot of potential and I'm constantly learning.
@@ -70,16 +73,72 @@
         <p class="phone-number">Feel free to reach out !</p>
         </div>
     </div>
+    <div class="hide" id="commit-history">
+    </div>
 
+ 
     <script>
+       let commitLoaded = false;
        function toggleAboutMe() {
-           var aboutMeCard = document.getElementById("about-me");
-           if (aboutMeCard.style.display === "none" || aboutMeCard.style.display === "") {
-               aboutMeCard.style.display = "block";
-           } else {
-               aboutMeCard.style.display = "none";
-           }
+           const aboutMeCard = document.getElementById("about-me");
+          aboutMeCard.classList.toggle("hide")
        }
+       function toggleCommits() {
+        let loadCommitHistory ;
+        const commitHistory = document.getElementById("commit-history");
+        commitHistory.classList.toggle("hide")
+        if(commitLoaded === false){
+            githubCommitsLoad();
+        }
+        commitLoaded = true;
+    }
+    function githubCommitsLoad(){
+
+            const username = 'Blaztiboi';
+            const repo = 'Web-Development-Projects';
+            const token = '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'; // Replace with your personal access token
+        
+            fetch(`https://api.github.com/repos/${username}/${repo}/commits`, {
+              headers: {
+                Authorization: `token ${token}`
+              }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const lastFiveCommits = data.slice(0, 5); // Extract the last 5 commits
+                const commitHistoryElement = document.getElementById('commit-history');
+                commitHistoryElement.innerHTML = "<strong>Last 5 commit history:</strong><br>";
+                lastFiveCommits.forEach(commit => {
+                  const commitElement = document.createElement('div');
+            commitElement.classList.add('commit');
+    
+            const timeElement = document.createElement('span');
+            timeElement.classList.add('time');
+            const commitDate = new Date(commit.commit.author.date);
+            const formattedDate = `${commitDate.getDate()} ${commitDate.toLocaleString('default', { month: 'short' })} ${commitDate.getFullYear()} ${commitDate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`;
+            timeElement.textContent = formattedDate;
+    
+            const authorElement = document.createElement('span');
+            authorElement.classList.add('author');
+            authorElement.textContent = commit.commit.author.name;
+            commitElement.appendChild(authorElement);
+    
+            const messageElement = document.createElement('span');
+            messageElement.classList.add('message');
+            messageElement.textContent = `: ${commit.commit.message} `;
+            commitElement.appendChild(messageElement);
+            commitElement.appendChild(timeElement);
+            commitHistoryElement.appendChild(commitElement); 
+              });
+            })
+            .catch(error => {
+              console.error('Error fetching commit history:', error);
+            });
+        
+        }
+   /*
+       
+   */
    </script>
 </body>
 </html>

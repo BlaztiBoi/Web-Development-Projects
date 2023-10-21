@@ -46,7 +46,7 @@ body {
     background-color: #f0e3b4;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: none; 
+
 }
 
 .contact-footer {
@@ -90,4 +90,21 @@ body {
 .phone-number {
     color:#333;
     font-size: 14px;
+}
+#commit-history{
+    color:#c4c4c4; 
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #484848;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+.commit .time {
+    color:#b1b1b1; 
+    font-size: small;
+}
+.hide {
+    display: none;
 }

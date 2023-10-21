@@ -30,10 +30,14 @@ i{
 /* layout */
 
 main, header{
-    width: 290px;
+    width: 100%;
     margin: 0 auto;
 }
-
+@media (min-width: 421px) {
+   main {
+        width: 420px;
+    }
+}
 header{
     padding-bottom: 25px;
 }
@@ -87,8 +91,9 @@ button{
 .tweet-details{
     display: flex;
     font-size: 13px;
-    justify-content: space-between;
-    width: 160px;
+    justify-content:flex-start;
+    width: 80%;
+    gap: 30%;
 }
 
 .tweet-detail{
@@ -111,7 +116,7 @@ button{
 }
 
 .tweet-text{
-    width: 207px;
+    width: 90%;
     font-size: 14px;
     line-height: 20px;
 }
