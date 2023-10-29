@@ -1,15 +1,56 @@
-const options = {
-    method: 'GET'
+
+ import { generateSudoku } from "./testData.js"
+
+let numberBtnsContainer = document.getElementById("number-buttons-container")
+let mistakesContainer = document.getElementById("mistakes")
+let grids = document.getElementById("grids")
+
+
+sudokuPageProcess()
+
+function sudokuPageProcess(){
+
+    numberBtnsContainer = document.getElementById("number-buttons-container")
+    mistakesContainer = document.getElementById("mistakes")
+    grids = document.getElementById("grids")
+    const difficultyContainer = document.getElementById("diffcultybtns-container")
+    difficultyContainer.addEventListener("click", async function(e) {
+        if(e.target.tagName === "BUTTON"){
+            const diff = e.target.textContent == "Easy" ? 1 : e.target.textContent == "Medium" ? 2 : 3
+            grids.innerHTML = `Generating Sudoku :  ${e.target.textContent}...`
+            // const sudokuData = await fetch("https://sudoku-api.vercel.app/api/dosuku", {method: 'GET'}).then(response => response.json())
+            const sudokuData = generateSudoku(diff)
+            sudokuRender(sudokuData)
+        }
+    })
+    
 }
-// import { testData as sudokuData } from "./testData.js"
-const sudokuData = await fetch("https://sudoku-api.vercel.app/api/dosuku", options).then(response => response.json())
+// sudokuRender()
+function resetBtn() {
 
-const numberBtnsContainer = document.getElementById("number-buttons-container")
-const mistakesContainer = document.getElementById("mistakes")
-
-console.log(sudokuData)
-
-sudokuRender()
+    const resetBtnContainer = document.getElementById("rest-btn-container")
+    const resetBtn = document.createElement("button")
+    resetBtn.textContent = "Reset"
+    resetBtnContainer.appendChild(resetBtn)
+    resetBtn.addEventListener("click",function(){
+        document.querySelector(".main-container").innerHTML = `
+        <h2 id="difficulty-text"></h2>
+        <div class="grids" id="grids">
+            <div id="diffcultybtns-container">
+                <button class="diffBtns">Easy</button>
+                <button class="diffBtns">Medium</button>
+                <button class="diffBtns">Hard</button>
+            </div>
+        </div>
+        <div class="numbers-container" id="number-buttons-container">
+        </div>
+        <div id="mistakes">
+        </div>    
+        <div id="rest-btn-container"></div>
+        `
+        sudokuPageProcess()
+    })
+}
 
 function madeMistake(){
     const mistakesMade = Number(mistakesContainer.dataset.mistakes)
@@ -25,7 +66,7 @@ function generateMistakes() {
     mistakesContainer.innerText = `Mistakes : 3 / 3`
 }
 function generateGrids(){
-    const grids = document.getElementById("grids")
+
     grids.innerHTML = ""
     for (let g = 0; g < 9; g++) {
         const gridContainer = document.createElement("div")
@@ -79,7 +120,10 @@ function generateNumbersButtons(){
 function assignCorrectValueForGrid(grid , value) {
     grid.setAttribute("data-value", value)
 }
-function sudokuRender() {
+function sudokuRender(sudokuData) {
+
+    document.getElementById("difficulty-text").textContent = `Difficulty : ${sudokuData.newboard.grids[0].difficulty}`
+    resetBtn()
     generateMistakes()
     generateGrids()
     generateNumbersButtons()
@@ -108,5 +152,6 @@ function sudokuRender() {
         })
         
     })
+    
 }
 

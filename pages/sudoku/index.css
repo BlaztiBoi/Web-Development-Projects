@@ -31,7 +31,40 @@ body {
     background-color: #2196F3;
 
 }
-
+#diffcultybtns-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+#diffcultybtns-container .diffBtns{
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    padding:10px 15px;
+    border-radius: 10px;
+    background-color: #2196F3;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+#diffcultybtns-container .diffBtns:hover{
+    background-color: #1b68a8;
+}
+#rest-btn-container {
+    margin: 10px;
+}
+#rest-btn-container button {
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    padding:10px 15px;
+    border-radius: 10px;
+    background-color: #2196F3;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+#rest-btn-container button:hover{
+    background-color: #1b68a8;
+}
 .grid-item {
     background-color: rgba(120, 120, 120, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
@@ -54,6 +87,7 @@ body {
 .grid-item.right{
     color: #66dbdf;
 }
+
 .empty{
     color: #677e91;
 }

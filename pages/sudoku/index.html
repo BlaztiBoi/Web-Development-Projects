@@ -40,14 +40,19 @@
             <h1>Sudoku</h1>
         </header>
         <main class="main-container">  
+            <h2 id="difficulty-text"></h2>
             <div class="grids" id="grids">
-                Generating Sudoku...
+                <div id="diffcultybtns-container">
+                    <button class="diffBtns">Easy</button>
+                    <button class="diffBtns">Medium</button>
+                    <button class="diffBtns">Hard</button>
+                </div>
             </div>
             <div class="numbers-container" id="number-buttons-container">
             </div>
             <div id="mistakes">
-               
             </div>    
+            <div id="rest-btn-container"></div>
         </main>
         <script src="index.js" type="module"></script> 
     </body>
