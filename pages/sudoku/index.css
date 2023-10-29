@@ -2,60 +2,118 @@
     margin: 0;
     padding: 0;
 }
+
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', Arial, sans-serif;
     color: white;
     text-align: center;
     background-color: #1F2937;
 }
+
 .main-container {
     border-radius: 10px;
-    padding: 20px ;
+    padding: 20px;
     margin: 20px 35%;
     background-color: #475d7c;
 
 }
-.grids{
+
+.grids {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
+
 .grid-container {
     width: 550px;
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto auto auto;
     background-color: #2196F3;
-   
-  }
+
+}
+
 .grid-item {
     background-color: rgba(120, 120, 120, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
-    padding:5px 5px;
+    padding: 5px 5px;
     font-size: 25px;
     text-align: center;
-  }
-
+    user-select: none;
+    cursor: pointer;
+}
+.grid-item.empty:hover {
+    background-color: #86a4bc;
+    color: #86a4bc;
+}
+.grid-item:hover {
+    background-color: #86a4bc;
+}
+.grid-item.wrong{
+    color: red;
+}
+.grid-item.right{
+    color: #66dbdf;
+}
+.empty{
+    color: #677e91;
+}
 .grid-container .grid-item:nth-child(3n) {
     margin-right: 5px;
 }
+
 .grid-container .grid-item:first-child {
     margin-left: 5px;
 }
+
 .grids .grid-container:nth-child(3n) {
     margin-bottom: 5px;
 }
-@media only screen and (max-width: 912px ) {
-    .main-container{
+.numbers-container {
+    padding:25px 0px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    justify-content: space-between;
+
+}
+.numbers-container .numberBtn {
+   color: #1F2937;
+   text-align: center;
+   font-size: 25px;
+   padding: 5px 8px;
+   background-color: lightskyblue;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: all 0.2s ease;
+
+}
+.numbers-container .numberBtn:hover {
+    color: lightskyblue;
+    background-color: #1F2937;
+}
+.numberBtn.selected {
+    color: rgb(0, 118, 192);
+    background-color: rgb(31, 76, 112);
+}
+.numberBtn.selected:hover{
+    color: rgb(0, 118, 192);
+    background-color: rgb(31, 76, 112);
+}
+@media only screen and (max-width: 912px) {
+    .main-container {
         width: 80%;
         margin: 30px 10px;
-     
-    }
-    .grid-container{
-     
+
     }
     .grid-item {
 
-        padding:5px 5px;
+        padding: 5px 5px;
         font-size: 25px;
-      }
-  }
+    }
+    .numbers-container{
+        width: 100%;
+    }
+}
+
