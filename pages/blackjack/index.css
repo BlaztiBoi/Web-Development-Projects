@@ -21,13 +21,11 @@ h1 {
 button {
     font-weight: bold;
     color: #016f32;
-    width: 200px;
     height: 30px;
     background: goldenrod;
     border-radius: 3px;
     border: none;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 5px 10px;
     margin-bottom:4px;
 }
 
