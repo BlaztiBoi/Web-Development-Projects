@@ -26,8 +26,6 @@ it's not fully completed but it is something " />
 it's not fully completed but it is something " />
 <meta property="twitter:image" content="../../icons/blackjack_icon - Copy.png" />
 
-
-
         <title>Blazt's Projects ( Webs )</title>
         <link rel="icon" href="../../icons/blackjack_icon.png">
         <link rel="stylesheet" href="../../main.css">
@@ -36,13 +34,17 @@ it's not fully completed but it is something " />
     </head>
     <body> 
         <a href="../../index.html" class="home-button">Home</a>
-        <h1>Blackjack</h1>
+        <h1>Blackjack</h1>  
         <p id="message-el">Want to play a round?</p>
-        <div id="cards-el">Cards:  </div>
-        <p id="sum-el">Sum:</p>
-        <button onclick="startGame()" id="start-game">START GAME</button>
-        <button onclick="newCard()" id="new-card" style="display:none;">NEW CARD</button>
+        <p id="sum-el"></p>
+        <div id="cards-player" class="cards-container"></div>
+        <br>
+        <p id="sum-el-com"></p>
+        <div id="cards-computer" class="cards-container"></div>
+        <button  id="start-game" class="hide">START GAME</button>
+        <button id="new-card" class="hide">NEW CARD</button>
+        <button id="stand" class="hide">Stand & Show Computer's Hand</button>
         <p id="player-el"></p>
-        <script src="index.js"></script>
+        <script src="index.js" type="module"></script>
     </body>
 </html>

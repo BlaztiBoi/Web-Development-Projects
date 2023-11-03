@@ -21,7 +21,7 @@ h1 {
 button {
     font-weight: bold;
     color: #016f32;
-    width: 150px;
+    width: 200px;
     height: 30px;
     background: goldenrod;
     border-radius: 3px;
@@ -48,15 +48,16 @@ button:active {
     justify-content: left; 
     align-items: left;
 }*/
-#cards-el span {
-	color: black;
-	background-color: #ecebeb;
-	border: 2px solid #af935f;
-	border-radius: 15%;
-	text-align: center;
-	font-size:0.9em;
-	user-select: none;
-    padding-top: 10px;
-    padding-bottom: 10px;
-	margin-right: 5px;
+  .cards-container {
+    margin-left: 40px;
+ /* Adjust width as needed */
+  }
+
+  .cards-container img {
+    width: 80px;
+    margin-left: -40px;
+  }
+
+.hide {
+    display: none;      
 }

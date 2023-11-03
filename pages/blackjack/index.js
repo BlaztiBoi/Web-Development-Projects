@@ -1,110 +1,136 @@
-let cardsList = {    
-    1 : ["A",11],
-    2 : ["2",2],
-    3 : ["3",3],
-    4 : ["4",4],
-    5 : ["5",5],
-    6 : ["6",6],
-    7 : ["7",7],
-    8 : ["8",8],
-    9 : ["9",9],
-    10 : ["10",10],
-    11 : ["J",10],
-    12 : ["Q",10],
-    13 : ["K",10]
+import { Player } from './player.js' 
+
+const sumElement = document.getElementById("sum-el");
+const messageElement = document.getElementById("message-el");
+const cardsPlayer = document.getElementById("cards-player");
+const cardsComputer = document.getElementById("cards-computer");
+const sumComputer = document.getElementById("sum-el-com");
+const startGameBtn = document.getElementById("start-game")
+const standBtn = document.getElementById("stand");
+const newCardBtn = document.getElementById("new-card")
+messageElement.textContent = `Loading... Please Wait...`;
+
+const winner = []
+
+const newDeck = await getnewDeck()
+const deckId = await newDeck.deck_id
+const deckCards = await drawCards(deckId,52)
+messageElement.textContent = `Want to play a round against computer?`
+startGameBtn.classList.toggle("hide")
+
+
+const player = new Player("You")
+const computer = new Player("Computer")
+startGameBtn.addEventListener("click", startGame)
+
+newCardBtn.addEventListener("click", function(e) {
+    drawCard(player,cardsPlayer)
+    if(player.sum < 21) {
+
+    }else if (player.sum == 21) {
+        newCardBtn.classList.add("hide")
+        standBtn.classList.add("hide")
+        message(`${player.name} Got a BlackJack!`)
+        winner.push(player.name)
+        player.stand = true
+        computerPlays()
+        
+    }else if (player.sum > 21) {
+        newCardBtn.classList.add("hide")
+        standBtn.classList.add("hide")
+        message(`Oops ${player.name} went over 21!`)
+        player.stand = true
+        computerPlays()
+    }
+})
+
+
+
+standBtn.addEventListener("click", ()=>{
+    player.stand = true
+    newCardBtn.classList.toggle("hide")
+    standBtn.classList.toggle("hide")
+    computerPlays()
+})
+
+function computerPlays(){
+    message("Computer Drawing ....")
+    drawCard(computer,cardsComputer,sumComputer)
+    drawCard(computer,cardsComputer,sumComputer)
+    while(!computer.blackjack && computer.stand === false){
+        if(computer.sum < 17 && computer.blackjack === false){
+            drawCard(computer,cardsComputer,sumComputer)
+        }else computer.stand = true
+    }
+    if(computer.blackjack) winner.push(computer.name)
+    console.log(computer)
+    console.log(player)
+    endGame()
+
 }
-let suit_ids = ["♣", "♦", "♥", "♠"]
+function endGame(){
+    if(winner.length > 1){
+        message("Draw!")
+    }else if(winner.length === 1){
+        message(`${winner[0]} Won!`)
+    }
+    else if(winner.length === 0 ){
+                if(computer.sum < 21 && player.sum < 21){
+                    if(computer.sum > player.sum){
+                        message("Computer Won!")
+                    }else if(player.sum > computer.sum){
+                        message("You Won!")
+                    }
+                }else if (computer.sum > 21 && player.sum < 21){
+                    message("You Won!")
+                }else if (player.sum > 21 && computer.sum < 21){
+                    message("Computer Won!")
+                }else message("Draw!")
 
-let player = { name: "Player", chips: 190  , cards: [] , sum : 0 , isAlive : false , hasBlackJack : false }
 
-let message = ""
-let messageEl = document.getElementById("message-el")
-let sumEl = document.getElementById("sum-el")
-let cardsEl = document.getElementById("cards-el")
-let playerEl = document.getElementById("player-el")
-let UISettings = {
-    hideStartGame(){
-        let startGame = document.getElementById("start-game")
-        startGame.style.display = "none"
-    },
-    hideNewCard(){
-        let newCard = document.getElementById("new-card")
-        newCard.style.display = "none"
-    },
-    showStartGame(){
-        let startGame = document.getElementById("start-game")
-        startGame.style.display = ""
-    },
-    showNewCard(){
-        let newCard = document.getElementById("new-card")
-        newCard.style.display = ""
     }
 }
-// playerEl.textContent = player.name + ": " + player.chips + " chips"
+function message(msg){
 
-function getRandomCard() {
-    let randomCard = cardsList[Math.floor(Math.random()* Object.keys(cardsList).length) +1]
-    let randomSuit = suit_ids[Math.floor(Math.random()* suit_ids.length)]
-    let card = {
-        name : randomCard[0],
-        value : randomCard[1],
-        suit : randomSuit
+    messageElement.textContent = `${msg}`
 
-    }
+}
+function drawCard(player,cardsContainer=cardsPlayer,sum=sumElement){
+    const card = deckCards.cards[0]
+    player.addCard(card)
+    renderCard(card,cardsContainer)
+    deckCards.cards.shift()
+    sum.textContent = `Sum : ${player.sum}`
+}
 
-    return card
+function startGame() {  
+    deckCards.cards.forEach((c,index) => {
+        if(index < 2){
+            drawCard(player,cardsPlayer,sumElement)
+        }
+    })
+
+    startGameBtn.classList.toggle("hide")
+    standBtn.classList.toggle("hide")
+    newCardBtn.classList.toggle("hide")
+
     
 }
-function createNewCard(card){
-
-    let span = document.createElement("span")
-    span.textContent = card.suit +" "+ card.name
-    cardsEl.appendChild(span)
+function renderCard(card,cards) {
+const img = document.createElement("img")
+    img.src = card.image
+    cards.append(img)
 }
-function startGame() {
-    player.hasBlackJack = false
-    player.isAlive = true
-    cardsEl.innerHTML = "Cards : "
-    let firstCard = getRandomCard()
-    let secondCard = getRandomCard()
-    player.cards = [firstCard, secondCard]
-    player.sum = firstCard.value + secondCard.value
-    UISettings.hideStartGame()
-    UISettings.showNewCard()
-    renderGame()
-}
-function renderGame() {
-    cardsEl.innerHTML = "Cards : "
-    for (let i = 0; i < player.cards.length; i++) {
+async function getnewDeck(){
+    const newDeck_cardsApi = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1";
+    const response = await fetch(newDeck_cardsApi);
+    const data = await response.json();
+    return data;
+}   
 
-       createNewCard(player.cards[i])
-    }
- 
-    sumEl.textContent = "Sum: " + player.sum
-    if (player.sum <= 20) {
-        message = "Do you want to draw a new card?"
-        UISettings.showNewCard()
-    } else if (player.sum === 21) {
-        message = "You've got Blackjack!"
-        player.hasBlackJack = true
-        UISettings.showStartGame() 
-        UISettings.hideNewCard()
-    } else {
-        message = "You're out of the game!"
-        player.isAlive = false
-        UISettings.showStartGame()
-        UISettings.hideNewCard()
-    }
-    messageEl.textContent = message
-
-}
-
-function newCard() {
-    if (player.isAlive === true && player.hasBlackJack === false) {
-        let card = getRandomCard()
-        player.sum += card.value
-        player.cards.push(card)
-       
-        renderGame()
-    }
+async function drawCards(deckId,card_amout) {
+    const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=${card_amout}`);
+    const data = await response.json();
+    return data;
+    
 }
