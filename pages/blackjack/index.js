@@ -1,5 +1,6 @@
 import { Player } from './player.js' 
 
+const scoreTracker = document.getElementById('score')
 const sumElement = document.getElementById("sum-el");
 const messageElement = document.getElementById("message-el");
 const cardsPlayer = document.getElementById("cards-player");
@@ -8,19 +9,24 @@ const sumComputer = document.getElementById("sum-el-com");
 const startGameBtn = document.getElementById("start-game")
 const standBtn = document.getElementById("stand");
 const newCardBtn = document.getElementById("new-card")
+const playAgainBtn = document.getElementById("play-again")
+const score = {
+    "You":0,
+    "Computer":0
+}
 messageElement.textContent = `Loading... Please Wait...`;
 
-const winner = []
+let winner = []
 
-const newDeck = await getnewDeck()
-const deckId = await newDeck.deck_id
-const deckCards = await drawCards(deckId,52)
+let newDeck = await getnewDeck()
+let deckId = await newDeck.deck_id
+let deckCards = await drawCards(deckId,52)
 messageElement.textContent = `Want to play a round against computer?`
 startGameBtn.classList.toggle("hide")
 
 
-const player = new Player("You")
-const computer = new Player("Computer")
+let player = new Player("You")
+let computer = new Player("Computer")
 startGameBtn.addEventListener("click", startGame)
 
 newCardBtn.addEventListener("click", function(e) {
@@ -53,6 +59,23 @@ standBtn.addEventListener("click", ()=>{
     computerPlays()
 })
 
+playAgainBtn.addEventListener("click", async () => {
+playAgainBtn.classList.add("hide")
+message(`Loading.....`)
+cardsPlayer.innerHTML = ""
+cardsComputer.innerHTML = ""
+sumElement.innerHTML = ""
+sumComputer.innerHTML = ""
+ newDeck = await getnewDeck()
+ deckId = await newDeck.deck_id
+ deckCards = await drawCards(deckId,52)
+ player = new Player("You")
+ computer = new Player("Computer")
+ winner = []
+ message(` `)
+ startGame()
+})
+
 function computerPlays(){
     message("Computer Drawing ....")
     drawCard(computer,cardsComputer,sumComputer)
@@ -63,33 +86,41 @@ function computerPlays(){
         }else computer.stand = true
     }
     if(computer.blackjack) winner.push(computer.name)
-    console.log(computer)
-    console.log(player)
     endGame()
-
+    playAgainBtn.classList.remove("hide")
 }
 function endGame(){
     if(winner.length > 1){
         message("Draw!")
     }else if(winner.length === 1){
         message(`${winner[0]} Won!`)
+        score[`${winner[0]}`] += 1
     }
     else if(winner.length === 0 ){
                 if(computer.sum < 21 && player.sum < 21){
                     if(computer.sum > player.sum){
                         message("Computer Won!")
+                        score.Computer += 1
                     }else if(player.sum > computer.sum){
                         message("You Won!")
+                        score.You += 1
                     }
                 }else if (computer.sum > 21 && player.sum < 21){
                     message("You Won!")
+                    score.You += 1
                 }else if (player.sum > 21 && computer.sum < 21){
                     message("Computer Won!")
+                    score.Computer += 1
                 }else message("Draw!")
 
 
     }
+
+    scoreTracker.textContent = `Computer - ${score.Computer} | You - ${score.You}`
 }
+
+
+
 function message(msg){
 
     messageElement.textContent = `${msg}`
@@ -110,7 +141,7 @@ function startGame() {
         }
     })
 
-    startGameBtn.classList.toggle("hide")
+    startGameBtn.classList.add("hide")
     standBtn.classList.toggle("hide")
     newCardBtn.classList.toggle("hide")
 
