@@ -77,7 +77,7 @@ sumComputer.innerHTML = ""
 })
 
 function computerPlays(){
-   
+    message("Computer Drawing ....")
     drawCard(computer,cardsComputer,sumComputer)
     drawCard(computer,cardsComputer,sumComputer)
     while(!computer.blackjack && computer.stand === false){
@@ -150,7 +150,6 @@ function startGame() {
 function renderCard(card,cards) {
 const img = document.createElement("img")
     img.src = card.image
-    img.draggable = false
     cards.append(img)
 }
 async function getnewDeck(){

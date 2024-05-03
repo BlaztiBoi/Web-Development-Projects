@@ -52,8 +52,6 @@ button:active {
   }
 
   .cards-container img {
-    user-select: none;
-    
     width: 80px;
     margin-left: -40px;
   }
