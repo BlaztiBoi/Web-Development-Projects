@@ -108,3 +108,22 @@ body {
 .hide {
     display: none;
 }
+
+.news {
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+    background-color: rgba(0, 0, 0, 0.5); 
+    height: 10vh;
+    width: 100%;
+    color: white;
+    padding-top: 5vh;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    align-self: center; 
+    text-align: center;
+    font-size: x-large;
+    
+}
